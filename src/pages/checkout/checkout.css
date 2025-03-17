@@ -1,0 +1,45 @@
+.checkout-container {
+    background-color: #e6f7ff; /* Light blue */
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .address-section, .payment-method, .discount-code, .order-summary, .package-info {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ffffff; /* White background */
+    border-radius: 8px;
+    border: 1px solid #d1e6fa; /* Keeping the subtle border for separation */
+  }
+  
+  h3 {
+    color: #333; /* Màu chữ */
+  }
+  
+  p, button {
+    color: #555;
+  }
+
+  /* Action buttons styling */
+  .action-button {
+    background-color: transparent;
+    color: #4CAF50;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    float: right;
+    font-weight: 500;
+  }
+
+  .action-button:hover {
+    text-decoration: underline;
+  }
+  
+  .grid-container {
+    background-color: #e6f7ff; /* Light blue */
+  }
+
+  .left-column, .right-column {
+    background-color: #e6f7ff; /* Light blue */
+  }
