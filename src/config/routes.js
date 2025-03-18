@@ -3,6 +3,9 @@ import HomePage from '../pages/Home';
 import CategoryPage from '../pages/Category';
 import ProductDetailPage from '../pages/Product/Detail';
 import AuthPage from '../pages/Auth';
+import PaymentSuccessPage from '../pages/Payment/PaymentSuccess';
+import PaymentFailedPage from '../pages/Payment/PaymentFailed';
+import PaymentCallbackPage from '../pages/Payment/PaymentCallback';
 import { registerUser, loginUser } from '../controllers/userController';
 
 // Lazy load các components
@@ -10,6 +13,9 @@ const Home = lazy(() => import('../pages/Home'));
 const Category = lazy(() => import('../pages/Category'));
 const ProductDetail = lazy(() => import('../pages/Product/Detail'));
 const Auth = lazy(() => import('../pages/Auth'));
+const PaymentSuccess = lazy(() => import('../pages/Payment/PaymentSuccess'));
+const PaymentFailed = lazy(() => import('../pages/Payment/PaymentFailed'));
+const PaymentCallback = lazy(() => import('../pages/Payment/PaymentCallback'));
 
 const routes = [
   {
@@ -55,6 +61,18 @@ export const publicRoutes = [
   {
     path: '/auth',
     component: AuthPage
+  },
+  {
+    path: '/payment/success',
+    component: PaymentSuccessPage
+  },
+  {
+    path: '/payment/failed',
+    component: PaymentFailedPage
+  },
+  {
+    path: '/payment/callback',
+    component: PaymentCallbackPage
   }
 ];
 

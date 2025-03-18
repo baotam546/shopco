@@ -46,6 +46,7 @@ import Voucher from "./pages/Manager/Voucher";
 import Feedback from "./pages/Manager/Feedback";
 import PaymentSuccess from "./pages/Payment/PaymentSuccess";
 import PaymentFailed from "./pages/Payment/PaymentFailed";
+import PaymentCallback from "./pages/Payment/PaymentCallback";
 
 // Component để hủy request khi chuyển trang
 function NavigationHandler() {
@@ -132,9 +133,22 @@ export default function App() {
           <Route path="/policy" element={<PrivacyPolicy />} />
           <Route path="/complaint" element={<Complaint />} />
           <Route path="/return" element={<Return />} />
-          <Route path="/payment-success" element={<PaymentSuccess />} />
-          <Route path="/payment-fail" element={<PaymentFailed />} />
+          <Route path="/payment/success" element={<PaymentSuccess />} />
+          <Route path="/payment/fail" element={<PaymentFailed />} />
+          <Route path="/payment/callback" element={<PaymentCallback />} />
 
+  {/* {
+    path: '/payment/success',
+    component: PaymentSuccessPage
+  },
+  {
+    path: '/payment/failed',
+    component: PaymentFailedPage
+  },
+  {
+    path: '/payment/callback',
+    component: PaymentCallbackPage
+  } */}
           {/* Auth Routes */}
           <Route
             path="/login"
