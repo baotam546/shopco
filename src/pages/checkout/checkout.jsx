@@ -90,9 +90,7 @@ const Checkout = () => {
     
     try {
       setLoading(true);
-      console.log('Fetching order with ID:', id);
       const response = await orderService.getOrderById(id);
-      console.log('Order response:', response);
       
       if (response) {
         setOrder(response);
@@ -246,8 +244,10 @@ const Checkout = () => {
       if (order && order.orderId) {
         // Call API to confirm payment
         //max 30 character for delivery address
-        await orderService.confirmpayment(order.orderId, paymentMethod, deliveryAddress.substring(0, 30));
-        setThankYouDialogOpen(true);
+        const response = await orderService.confirmpayment(order.orderId, paymentMethod, deliveryAddress.substring(0, 30), paymentMethod);
+        //navigate to response url payment
+        window.location.href = response.paymentUrl;
+        // setThankYouDialogOpen(true);
       }
     } catch (error) {
       console.error('Error confirming payment:', error);
@@ -481,7 +481,7 @@ const Checkout = () => {
               {/* Product Image */}
               <Box sx={{ width: '70px', height: '70px', mr: 2 }}>
                 <img 
-                  src={item.product?.imgUrl ? `https://klairscosmetics.com/wp-content/uploads/2017/04/${item.product.imgUrl}.jpg` : "https://klairscosmetics.com/wp-content/uploads/2017/04/supple-toner-1.jpg"} 
+                  src={item?.product?.imageUrls?.[0] || "https://klairscosmetics.com/wp-content/uploads/2017/04/supple-toner-1.jpg"} 
                   // alt={item.product?.productName || "Product"} 
                   alt="Product"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '4px' }} 

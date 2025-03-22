@@ -29,7 +29,7 @@ export default function ProductCard({ product }) {
         image={product.imgUrl}
         alt={product.name}
       /> */}
-      <img src={product.imgUrl} alt={product.productName} style={{width: '100%', height: '233px'}} />
+      <img src={product?.imageUrls[0] || ''} alt={product.productName} style={{width: '100%', height: '233px'}} />
       <div style={{ padding: '8px 16px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
       {product.name}
       </div>
@@ -54,11 +54,11 @@ export default function ProductCard({ product }) {
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Rating value={product.rating} precision={0.5} readOnly size="small" />
-          <Typography variant="body2" color="text.secondary">
+          {/* <Typography variant="body2" color="text.secondary">
             ({product.ratingCount})
-          </Typography>
+          </Typography> */}
           <Typography variant="body2" color="text.secondary">
-            Đã bán {product.soldCount}
+            Đã bán {product?.totalSold || 0}
           </Typography>
         </Box>
       </CardContent>
