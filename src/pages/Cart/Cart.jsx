@@ -71,7 +71,7 @@ const Cart = () => {
             price: item.price,
             originalPrice: item.price * 1.2, // Assuming 20% markup, adjust as needed
             quantity: item.quantity,
-            imgUrl: item.product ? item.product.imgUrl : 'https://via.placeholder.com/150',
+            imgUrl: item.product ? item.product.imageUrls[0] : 'https://via.placeholder.com/150',
           }));
           setCartItems(items);
           localStorage.setItem('cart', JSON.stringify(items));

@@ -92,7 +92,12 @@ export default function ProductDetail() {
   const [reviewContent, setReviewContent] = useState('');
   const [reviewRating, setReviewRating] = useState(0);
   const [totalSold, setTotalSold] = useState(0);
-
+  const [mainImageUrl, setMainImageUrl] = useState('');
+  
+  const handleThumbnailClick = (imageUrl) => {
+  // Update the selected thumbnail index
+  setMainImageUrl(imageUrl);
+};
   useEffect(() => {
     isMounted.current = true;
     if (!requestInProgress.current) {
@@ -129,6 +134,7 @@ export default function ProductDetail() {
             }
           ]
         });
+        setMainImageUrl(fetchedProduct?.imageUrls[0] || '');
         setReviews(fetchedReviews);
         if (totalSold) {
           setTotalSold(totalSold.totalSold);
@@ -143,7 +149,6 @@ export default function ProductDetail() {
       requestInProgress.current = false;
     }
   };
-  console.log("review",reviews);
 
   if (loading) {
     return <Typography>Đang tải sản phẩm...</Typography>;
@@ -219,11 +224,6 @@ export default function ProductDetail() {
     }
   };
 
-  // Helper function to check if image exists
-  const getImageUrl = (imgUrl) => {
-    if (!imgUrl) return null;
-    return `/images/products/${imgUrl}.jpg`;
-  };
 
   return (
     <>
@@ -243,35 +243,61 @@ export default function ProductDetail() {
         </Breadcrumbs>
         <Grid container spacing={3}>
           {/* Product Images */}
+
           <Grid item xs={12} md={6}>
-            <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              {/* Thumbnails column */}
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '80px' }}>
+                {/* You would map through product images here */}
+                {product?.imageUrls?.map((thumb, index) => (
+                  <Box 
+                    key={index}
+                    sx={{ 
+                      border: '1px solid #eee',
+                      cursor: 'pointer',
+                      '&:hover': { borderColor: '#ccc' }
+                    }}
+                    onClick={() => handleThumbnailClick(thumb)}
+                  >
+                    <img 
+                      src={thumb} 
+                      alt={`${product.productName} thumbnail ${index}`} 
+                      style={{ width: '100%', height: '80px', objectFit: 'contain' }} 
+                    />
+                  </Box>
+                ))}
+              </Box>
               
               {/* Main image */}
-              <div
-              style={{display: 'flex', flexDirection: 'column', gap: 2}}>
+              <Box 
+                sx={{ 
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid #eee',
+                  padding: 2
+                }}
+              >
                 {loading ? (
-                  <Box 
-                    sx={{ 
-                      bgcolor: 'red', 
-                      height: 400, 
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      border: '1px solid #eee'
-                    }}
-                  >
-                    <Typography variant="h6" color="#bdbdbd">
-                      Loading Image...
-                    </Typography>
-                  </Box>
+                  <Typography variant="h6" color="#bdbdbd">
+                    Loading Image...
+                  </Typography>
                 ) : (
-                  <img src={product.imgUrl} alt={product.productName} style={{width: '100%', height: '433px'}} />
-
+                  <img 
+                    src={mainImageUrl} 
+                    alt={product.productName} 
+                    style={{ 
+                      maxWidth: '100%', 
+                      maxHeight: '400px',
+                      objectFit: 'contain'
+                    }} 
+                  />
                 )}
-              </div>
+              </Box>
             </Box>
           </Grid>
+          
           
           {/* Product Details */}
           <Grid item xs={12} md={6}>

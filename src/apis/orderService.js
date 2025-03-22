@@ -247,11 +247,12 @@ const orderService = {
             throw error; 
         }
     },
-    confirmpayment: async (orderId,deliveryAddress) => {
+    confirmpayment: async (orderId,deliveryAddress,paymentMethod) => {
         try {
             const response = await axiosClient.post(`/api/Orders/confirm-payment`,{
                 orderId,
-                deliveryAddress
+                deliveryAddress,
+                paymentMethod
             });
             return response; 
         } catch (error) {
